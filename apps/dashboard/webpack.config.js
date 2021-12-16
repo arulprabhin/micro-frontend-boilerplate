@@ -4,6 +4,8 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const deps = require("./package.json").dependencies;
+
 module.exports = {
   entry: "./src/index.jsx",
   mode: "development",
@@ -73,8 +75,21 @@ module.exports = {
       library: { type: "var", name: "dashboard" },
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: { "./Dashboard": "./src/App" },
-      shared: ["react", "react-dom", "react-router-dom"],
+      exposes: {
+        "./route": "./src/App",
+      },
+      shared: {
+        ...deps,
+        react: { singleton: true, requiredVersion: deps.react },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: deps["react-router-dom"],
+        },
+      },
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
     new MiniCssExtractPlugin({ filename: "style.css" }),

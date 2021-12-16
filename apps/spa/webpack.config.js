@@ -4,6 +4,8 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const deps = require("./package.json").dependencies;
+
 module.exports = {
   entry: "./src/index.jsx",
   mode: "development",
@@ -76,7 +78,18 @@ module.exports = {
       remotes: {
         "@logrhythm/dashboard": "dashboard",
       },
-      shared: ["react", "react-dom", "react-router-dom"],
+      shared: {
+        ...deps,
+        react: { singleton: true, requiredVersion: deps.react },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: deps["react-router-dom"],
+        },
+      },
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
     new MiniCssExtractPlugin({ filename: "style.css" }),

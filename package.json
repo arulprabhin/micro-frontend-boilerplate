@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Micro-frontend boiler for misnet",
   "scripts": {
-    "start": "yarn nx run-many --target=start --all --parallel",
+    "start": "nx run-many --target=start --all --parallel",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
