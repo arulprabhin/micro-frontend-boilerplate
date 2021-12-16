@@ -1,0 +1,21 @@
+{
+  "name": "micro-frontend-boilerplate",
+  "version": "1.0.0",
+  "description": "Micro-frontend boiler for misnet",
+  "scripts": {
+    "start": "yarn nx run-many --target=start --all --parallel",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idecker09/micro-frontend-boilerplate.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@nrwl/workspace": "latest",
+    "@nrwl/cli": "latest",
+    "@nrwl/tao": "latest",
+    "typescript": "4.2.4",
+    "@nrwl/nx-cloud": "latest"
+  }
+}
