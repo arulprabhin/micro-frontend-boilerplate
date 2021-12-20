@@ -12,23 +12,23 @@ import {
   Avatar,
   Tooltip,
   MenuItem,
-  Link,
- } from '@mui/material';
- import MenuIcon from '@mui/icons-material/Menu';
+  Link
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const pages = [
-  { label: 'Dashboard', url: '/dashboard' }, 
+  { label: 'Dashboard', url: '/dashboard' },
   { label: 'Products', url: '/products' },
   { label: 'Pricing', url: '/pricing' },
-  { label: 'Dashboard Blog', url: '/dashboard/blog' },
+  { label: 'Dashboard Blog', url: '/dashboard/blog' }
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
-  const { name } = useSelector(state => state.user);
+
+  const { name } = useSelector((state) => state.user);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -49,12 +49,7 @@ const Header = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
+          <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
             LogRhythm
           </Typography>
 
@@ -65,8 +60,7 @@ const Header = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+              color="inherit">
               <MenuIcon />
             </IconButton>
             <Menu
@@ -74,19 +68,18 @@ const Header = () => {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'left'
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'left'
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
+                display: { xs: 'block', md: 'none' }
+              }}>
               {pages.map((page) => (
                 <MenuItem key={page.url} onClick={handleCloseNavMenu}>
                   <Link key={page.url} component={NavLink} to={page.url} underline="none">
@@ -96,17 +89,17 @@ const Header = () => {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             LogRhythm
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link key={page.url} component={NavLink} to={page.url} underline="none" sx={{ m: 2, color: 'white', display: 'block' }}>
+              <Link
+                key={page.url}
+                component={NavLink}
+                to={page.url}
+                underline="none"
+                sx={{ m: 2, color: 'white', display: 'block' }}>
                 {page.label}
               </Link>
             ))}
@@ -124,16 +117,15 @@ const Header = () => {
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'right'
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'right'
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{setting}</Typography>

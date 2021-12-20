@@ -14,12 +14,14 @@ You should install dependencies for all micro frontend apps one by one.
     ```sh
     yarn install
     ```
+
 2.  Install dependencies in spa
 
     ```sh
     cd apps/spa
     yarn install
     ```
+
 3.  Install dependencies in dashboard
 
     ```sh
