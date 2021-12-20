@@ -1,25 +1,18 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  Container,
-  Avatar,
-  Tooltip,
-  MenuItem,
-  Link,
- } from '@mui/material';
- import MenuIcon from '@mui/icons-material/Menu';
+import {NavLink} from 'react-router-dom';
+import {AppBar, Box, Container, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, Typography,} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import {LogRhythmLogo} from '../common';
+/*import { default as UserProfileIcon} from '@mui/icons-material/AccountCircleRounded';*/
+import UserProfileIcon from '@mui/icons-material/ManageAccounts';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import Icon from '@mui/material/Icon';
 
 const pages = [
-  { label: 'Dashboard', url: '/dashboard' }, 
-  { label: 'Products', url: '/products' },
-  { label: 'Pricing', url: '/pricing' },
-  { label: 'Dashboard Blog', url: '/dashboard/blog' },
+  { label: 'Dashboard', url: '/dashboard', icon: <DashboardIcon /> },
+  { label: 'Products', url: '/products', icon: "star" },
+  { label: 'Pricing', url: '/pricing', icon: "star" },
+  { label: 'Dashboard Blog', url: '/dashboard/blog', icon: null },
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -52,7 +45,7 @@ const Header = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LogRhythm
+            <LogRhythmLogo />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -84,10 +77,10 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.url} onClick={handleCloseNavMenu}>
-                  <Link key={page.url} component={NavLink} to={page.url} underline="none">
-                    {page.label}
+              {pages.map(({label, url, icon}) => (
+                <MenuItem key={url} onClick={handleCloseNavMenu}>
+                  <Link key={url} component={NavLink} to={url} underline="none">
+                    <Icon>{icon}</Icon>{label}
                   </Link>
                 </MenuItem>
               ))}
@@ -99,12 +92,13 @@ const Header = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LogRhythm
+            <LogRhythmLogo />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Link key={page.url} component={NavLink} to={page.url} underline="none" sx={{ m: 2, color: 'white', display: 'block' }}>
-                {page.label}
+            {pages.map(({label, url, icon}) => (
+              <Link key={url} component={NavLink} to={url} underline="none" sx={{ m: 2, color: 'white', display: 'block' }}>
+                <Icon>{icon}</Icon>
+                {label}
               </Link>
             ))}
           </Box>
@@ -112,7 +106,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar>RS</Avatar>
+                <UserProfileIcon fontSize={"large"} />
               </IconButton>
             </Tooltip>
             <Menu
