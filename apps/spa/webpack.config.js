@@ -66,6 +66,10 @@ module.exports = {
         use: ["style-loader", "css-loader"],
         exclude: /\.module\.css$/,
       },
+      {
+        test: /\.(jpg|jpeg|png|svg|gif)$/,
+        use: { loader: 'url-loader' }
+      }
     ],
   },
 

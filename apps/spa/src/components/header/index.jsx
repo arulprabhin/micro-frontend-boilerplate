@@ -2,19 +2,12 @@ import * as React from 'react';
 import {NavLink} from 'react-router-dom';
 import {AppBar, Box, Container, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, Typography,} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import {LogRhythmLogo} from '../common';
-/*import { default as UserProfileIcon} from '@mui/icons-material/AccountCircleRounded';*/
+import { LogRhythmLogo, MainPages, SettingPages } from '../common';
 import UserProfileIcon from '@mui/icons-material/ManageAccounts';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import Icon from '@mui/material/Icon';
-
-const pages = [
-  { label: 'Dashboard', url: '/dashboard', icon: <DashboardIcon /> },
-  { label: 'Products', url: '/products', icon: "star" },
-  { label: 'Pricing', url: '/pricing', icon: "star" },
-  { label: 'Dashboard Blog', url: '/dashboard/blog', icon: null },
-];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,18 +27,53 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+///////
+  const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto',
+    },
+  }));
 
+  const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch',
+      },
+    },
+  }));
+/////////////
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xxl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
-            <LogRhythmLogo />
+          <Typography noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
+            <Link key={MainPages[0].url} component={NavLink} to={MainPages[0].url} underline="none"><LogRhythmLogo /></Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -77,30 +105,32 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map(({label, url, icon}) => (
+              {MainPages.map(({label, url, icon}) => (
                 <MenuItem key={url} onClick={handleCloseNavMenu}>
                   <Link key={url} component={NavLink} to={url} underline="none">
-                    <Icon>{icon}</Icon>{label}
+                    { icon && <Icon>{icon}</Icon> }{label}
                   </Link>
                 </MenuItem>
               ))}
+              <Search>
+                <SearchIconWrapper> <SearchIcon /> </SearchIconWrapper>
+                <StyledInputBase placeholder="Search Logs…" inputProps={{ 'aria-label': 'search' }} />
+              </Search>
             </Menu>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
-            <LogRhythmLogo />
+          <Typography noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Link key={MainPages[0].url} component={NavLink} to={MainPages[0].url} underline="none"><LogRhythmLogo /></Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map(({label, url, icon}) => (
+            {MainPages.map(({label, url, icon}) => (
               <Link key={url} component={NavLink} to={url} underline="none" sx={{ m: 2, color: 'white', display: 'block' }}>
-                <Icon>{icon}</Icon>
-                {label}
+                { icon && <Icon>{icon}</Icon> }{label}
               </Link>
             ))}
+            <Search>
+              <SearchIconWrapper> <SearchIcon /> </SearchIconWrapper>
+              <StyledInputBase placeholder="Search Logs…" inputProps={{ 'aria-label': 'search' }} />
+            </Search>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -125,9 +155,10 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {SettingPages.map(({label, url, icon}) => (
+                <MenuItem key={url} onClick={handleCloseNavMenu}>
+                  { icon && <Icon>{icon}</Icon> }
+                  <Typography textAlign="center">{label}</Typography>
                 </MenuItem>
               ))}
             </Menu>

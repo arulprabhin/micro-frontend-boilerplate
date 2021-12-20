@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import DashboardIcon from "@mui/icons-material/Dashboard";
 export const LogRhythmLogo = () => {
   return (<svg width="193px" height="30px" viewBox="0 0 193 30" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -11,3 +11,17 @@ export const LogRhythmLogo = () => {
     </g>
   </svg>);
 };
+
+export const MainPages = [
+  { label: 'Dashboard', url: '/dashboard', icon: <DashboardIcon /> },
+  { label: 'Products', url: '/products', icon: "" },
+  { label: 'Pricing', url: '/pricing', icon: "" },
+  { label: 'Blog', url: '/dashboard/blog', icon: null },
+  { label: 'ELK Table', url: '/elk-table', icon: null },
+];
+export const SettingPages = [
+  { label: 'Profile', url: '', icon: null },
+  { label: 'Account', url: '', icon: null },
+  { label: 'Dashboard', url: '', icon: null },
+  { label: 'Logout', url: '', icon: null }
+];
